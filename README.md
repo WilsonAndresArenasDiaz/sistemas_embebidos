@@ -1,4 +1,4 @@
-# [cite_start]Laboratorio de Física Electromagnética: Ley de Coulomb [cite: 1]
+# []Laboratorio de Física Electromagnética: Ley de Coulomb []
 
 [cite_start]Este proyecto documenta la simulación de la **Ley de Coulomb** realizada en Excel, analizando cómo varía la fuerza eléctrica en función de la distancia y la magnitud de las cargas[cite: 2, 4].
 
