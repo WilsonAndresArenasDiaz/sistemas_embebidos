@@ -59,7 +59,9 @@ Por ejemplo:
 14 = E
 15 = F
 
-### 5. Desarrollo del Sistema
+### 5. Codigo implementado
+
+### 6. Desarrollo del Sistema
 
 El funcionamiento del sistema se realiza en las siguientes etapas:
 
@@ -75,7 +77,8 @@ Se consulta una tabla de decodificación que indica qué segmentos deben encende
 
 Los displays muestran el valor decimal correspondiente.
 
-### 6. Tabla de Conversión
+### 7. Tabla de Conversión
+
 | Binario | Decimal | Octal | Hexadecimal |
 | ------- | ------- | ----- | ----------- |
 | 0000    | 0       | 0     | 0           |
@@ -95,13 +98,13 @@ Los displays muestran el valor decimal correspondiente.
 | 1110    | 14      | 16    | E           |
 | 1111    | 15      | 17    | F           |
 
-### 7. Resultados
+### 8. Resultados
 
 El sistema funcionó correctamente dentro del rango esperado (0 a 15), mostrando en los displays el valor decimal correspondiente a la combinación binaria ingresada.
 
 Las conversiones a sistema octal y hexadecimal fueron verificadas mediante cálculos teóricos y comparación con la tabla de resultados.
 
-### 8. Conclusiones
+### 9. Conclusiones
 
 El microcontrolador interpreta naturalmente valores binarios como números enteros.
 
