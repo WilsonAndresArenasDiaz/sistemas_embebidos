@@ -87,7 +87,7 @@ Por ejemplo:
 | 1111    | 15      | 17    | F           |
 
 ### 5. Codigo implementado
-´´#include <xc.h>
+´´´ #include <xc.h>
 #define _XTAL_FREQ 8000000
 
 void UART_Init(){
@@ -159,7 +159,7 @@ void main(){
             UART_Text("\r\nDecimal valido");
         }
     }
-}´´´
+} ´´´
 
 ### 6. Desarrollo del Sistema
 
