@@ -182,10 +182,43 @@ El sistema funcionó correctamente dentro del rango esperado (0 a 15), mostrando
 
 Las conversiones a sistema octal y hexadecimal fueron verificadas mediante cálculos teóricos y comparación con la tabla de resultados.
 
-### 9. Conclusiones
 
-* El microcontrolador interpreta naturalmente valores binarios como números enteros.
 
-* La separación en decenas y unidades permite visualizar números de dos cifras.
+## Laboratorio N° 2: Monitoreo de ilumacion de tempratura mediante ChatBoot
 
-* El uso de una tabla de decodificación simplifica el control de los displays.
+### 1. Introduccion
+Este proyecto consiste en el desarrollo de un sistema embebido que integra un Arduino con un chatbot ejecutado en una computadora, permitiendo:
+Controlar iluminación (2 LEDs).
+* Monitorear temperatura.
+* Medir nivel de iluminación ambiental.
+* Comunicación bidireccional mediante puerto serial.
+
+El chatbot se ejecuta en Python y envía comandos al Arduino a través de comunicación serial, permitiendo interacción por texto o voz.
+
+### 2. Objivo General
+* Implementar comunicación serial entre Arduino y computadora.
+* Controlar dispositivos de salida (LEDs).
+*Leer sensores analógicos (temperatura y luz).
+*Diseñar un chatbot que interprete comandos del usuario.
+*Integrar hardware y software en un sistema funcional.
+
+### 3. Diseño del Circuito
+#### Comunicación Serial
+#### Control de Iluminación
+#### Sensor de Temperatura (LM35)
+#### Sensor de Iluminación (LDR)
+
+
+
+### 4. Desarollo del sistema
+1. El usuario escribe o pronuncia un comando.
+2. El chatbot interpreta el texto.
+3. Python envía el comando al Arduino por puerto serial.
+4. Arduino ejecuta la acción correspondiente:
+    * Encender o apagar LEDs.
+    * Medir temperatura.
+    * Medir nivel de luz.
+5. Arduino envía una respuesta.
+6. El chatbot muestra la respuesta al usuario.
+
+
