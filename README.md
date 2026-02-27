@@ -165,6 +165,8 @@ void main(){
         }
     }
 }
+
+
 ### 6. Desarrollo del Sistema
 
 1. El funcionamiento del sistema se realiza en las siguientes etapas:
