@@ -4,9 +4,13 @@
 
 ### 1. Introducción
 En este laboratorio se desarrolló un sistema embebido basado en el microcontrolador PIC16F887, capaz de convertir un número binario de 4 bits (D, C, B, A) a:
+
 Sistema Decimal
+
 Sistema Octal
+
 Sistema Hexadecimal
+
 El sistema permite visualizar el resultado en dos displays de 7 segmentos.
 El rango del sistema es:
 
