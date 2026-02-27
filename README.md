@@ -87,7 +87,7 @@ Por ejemplo:
 | 1111    | 15      | 17    | F           |
 
 ### 5. Codigo implementado
-[
+(
 #include <xc.h>
 #define _XTAL_FREQ 8000000
 
@@ -161,7 +161,7 @@ void main(){
         }
     }
 }
-]
+)
 
 ### 6. Desarrollo del Sistema
 
