@@ -67,25 +67,7 @@ Por ejemplo:
 
 15 = F
 
-### 5. Codigo implementado
-
-### 6. Desarrollo del Sistema
-
-1. El funcionamiento del sistema se realiza en las siguientes etapas:
-
-2. El usuario configura una combinación binaria mediante los interruptores.
-
-3. El microcontrolador lee los 4 bits desde el puerto A.
-
-4. El valor es interpretado automáticamente como un número decimal.
-
-5. Se separa el número en decenas y unidades mediante operaciones de división y módulo.
-
-6. Se consulta una tabla de decodificación que indica qué segmentos deben encenderse.
-
-7. Los displays muestran el valor decimal correspondiente.
-
-### 7. Tabla de Conversión
+#### Tabla de Conversión
 
 | Binario | Decimal | Octal | Hexadecimal |
 | ------- | ------- | ----- | ----------- |
@@ -105,6 +87,24 @@ Por ejemplo:
 | 1101    | 13      | 15    | D           |
 | 1110    | 14      | 16    | E           |
 | 1111    | 15      | 17    | F           |
+
+### 5. Codigo implementado
+
+### 6. Desarrollo del Sistema
+
+1. El funcionamiento del sistema se realiza en las siguientes etapas:
+
+2. El usuario configura una combinación binaria mediante los interruptores.
+
+3. El microcontrolador lee los 4 bits desde el puerto A.
+
+4. El valor es interpretado automáticamente como un número decimal.
+
+5. Se separa el número en decenas y unidades mediante operaciones de división y módulo.
+
+6. Se consulta una tabla de decodificación que indica qué segmentos deben encenderse.
+
+7. Los displays muestran el valor decimal correspondiente.
 
 ### 8. Resultados
 
