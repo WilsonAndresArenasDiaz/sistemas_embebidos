@@ -71,19 +71,19 @@ Por ejemplo:
 
 ### 6. Desarrollo del Sistema
 
-El funcionamiento del sistema se realiza en las siguientes etapas:
+1. El funcionamiento del sistema se realiza en las siguientes etapas:
 
-El usuario configura una combinación binaria mediante los interruptores.
+2. El usuario configura una combinación binaria mediante los interruptores.
 
-El microcontrolador lee los 4 bits desde el puerto A.
+3. El microcontrolador lee los 4 bits desde el puerto A.
 
-El valor es interpretado automáticamente como un número decimal.
+4. El valor es interpretado automáticamente como un número decimal.
 
-Se separa el número en decenas y unidades mediante operaciones de división y módulo.
+5. Se separa el número en decenas y unidades mediante operaciones de división y módulo.
 
-Se consulta una tabla de decodificación que indica qué segmentos deben encenderse.
+6. Se consulta una tabla de decodificación que indica qué segmentos deben encenderse.
 
-Los displays muestran el valor decimal correspondiente.
+7. Los displays muestran el valor decimal correspondiente.
 
 ### 7. Tabla de Conversión
 
