@@ -56,10 +56,15 @@ El sistema hexadecimal trabaja en base 16. Utiliza los símbolos del 0 al 9 y la
 Por ejemplo:
 
 10 = A
+
 11 = B
+
 12 = C
+
 13 = D
+
 14 = E
+
 15 = F
 
 ### 5. Codigo implementado
