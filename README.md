@@ -88,54 +88,51 @@ Por ejemplo:
 
 ### 5. Codigo implementado
 
+## 5. Código implementado
+
 ```c
 #include <xc.h>
 #define _XTAL_FREQ 8000000
 
-// Inicialización de la comunicación UART 
-void UART_Init(){ 
-    SPBRG = 51; 
-    BRGH = 1; 
-    SYNC = 0; 
-    SPEN = 1; 
-    TXEN = 1; 
-    CREN = 1; 
+void UART_Init(){
+    SPBRG=51;
+    BRGH=1;
+    SYNC=0;
+    SPEN=1;
+    TXEN=1;
+    CREN=1;
 }
 
-// Envía un solo carácter 
-void UART_Write(char data){ 
-    while(!TRMT); 
-    TXREG = data; 
+void UART_Write(char data){
+    while(!TRMT);
+    TXREG=data;
 }
 
-// Envía una cadena de texto 
-void UART_Text(const char *text){ 
-    while(*text) UART_Write(*text++); 
+void UART_Text(const char *text){
+    while(*text) UART_Write(*text++);
 }
 
-// Recibe un carácter 
-char UART_Read(){ 
-    while(!RCIF); 
-    return RCREG; 
+char UART_Read(){
+    while(!RCIF);
+    return RCREG;
 }
 
-// Conversión personalizada de base a decimal 
-unsigned int convertirDecimal(char *valor, int base){ 
-    unsigned int resultado = 0; 
-    while(*valor){ 
-        resultado *= base; 
-        if(*valor >= '0' && *valor <= '9') 
-            resultado += *valor - '0'; 
-        else if(*valor >= 'A' && *valor <= 'F') 
-            resultado += *valor - 'A' + 10; 
-        valor++; 
-    } 
-    return resultado; 
+unsigned int convertirDecimal(char *valor, int base){
+    unsigned int resultado=0;
+    while(*valor){
+        resultado*=base;
+        if(*valor>='0' && *valor<='9')
+            resultado+=*valor-'0';
+        else if(*valor>='A' && *valor<='F')
+            resultado+=*valor-'A'+10;
+        valor++;
+    }
+    return resultado;
 }
 
-void main(){ 
-    TRISC6 = 0; // TX como salida 
-    TRISC7 = 1; // RX como entrada 
+void main(){
+    TRISC6=0;
+    TRISC7=1;
     UART_Init();
 
     char valor[5];
@@ -145,27 +142,27 @@ void main(){
     while(1){
         UART_Text("\r\nIngrese BIN (max4): ");
         
-        for(i = 0; i < 4; i++){
-            valor[i] = UART_Read();
+        for(i=0;i<4;i++){
+            valor[i]=UART_Read();
             UART_Write(valor[i]);
 
-            if(valor[i] != '0' && valor[i] != '1'){
+            if(valor[i]!='0' && valor[i]!='1'){
                 UART_Text("\r\nError caracter");
                 break;
             }
         }
 
-        valor[4] = '\0';
-        decimal = convertirDecimal(valor, 2);
+        valor[4]='\0';
+        decimal=convertirDecimal(valor,2);
 
-        if(decimal > 15){
+        if(decimal>15){
             UART_Text("\r\nError rango >15");
-        } else {
+        }else{
             UART_Text("\r\nDecimal valido");
         }
     }
 }
-c´´´
+
 
 ### 6. Desarrollo del Sistema
 
