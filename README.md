@@ -27,13 +27,13 @@ Desarrollar un sistema conversor binario utilizando el PIC16F887.
 ### 3. Diseño del Circuito
 
 #### Alimentación
-VDD → +5V
+* VDD → +5V
 
-VSS → GND
+* VSS → GND
 
-Resistencia 10kΩ en MCLR
+* Resistencia 10kΩ en MCLR
 
-Capacitor 100nF de desacoplo
+* Capacitor 100nF de desacoplo
 
 #### Entradas Binarias
 
@@ -87,6 +87,79 @@ Por ejemplo:
 | 1111    | 15      | 17    | F           |
 
 ### 5. Codigo implementado
+´´#include <xc.h>
+#define _XTAL_FREQ 8000000
+
+void UART_Init(){
+    SPBRG=51;
+    BRGH=1;
+    SYNC=0;
+    SPEN=1;
+    TXEN=1;
+    CREN=1;
+}
+
+void UART_Write(char data){
+    while(!TRMT);
+    TXREG=data;
+}
+
+void UART_Text(const char *text){
+    while(*text) UART_Write(*text++);
+}
+
+char UART_Read(){
+    while(!RCIF);
+    return RCREG;
+}
+
+unsigned int convertirDecimal(char *valor, int base){
+    unsigned int resultado=0;
+    while(*valor){
+        resultado*=base;
+        if(*valor>='0' && *valor<='9')
+            resultado+=*valor-'0';
+        else if(*valor>='A' && *valor<='F')
+            resultado+=*valor-'A'+10;
+        valor++;
+    }
+    return resultado;
+}
+
+void main(){
+    TRISC6=0;
+    TRISC7=1;
+    UART_Init();
+
+    char valor[5];
+    unsigned int decimal;
+    int i;
+
+    while(1){
+
+        UART_Text("\r\nIngrese BIN (max4): ");
+        
+        for(i=0;i<4;i++){
+            valor[i]=UART_Read();
+            UART_Write(valor[i]);
+
+            if(valor[i]!='0' && valor[i]!='1'){
+                UART_Text("\r\nError caracter");
+                break;
+            }
+        }
+
+        valor[4]='\0';
+
+        decimal=convertirDecimal(valor,2);
+
+        if(decimal>15){
+            UART_Text("\r\nError rango >15");
+        }else{
+            UART_Text("\r\nDecimal valido");
+        }
+    }
+}´´´
 
 ### 6. Desarrollo del Sistema
 
@@ -112,10 +185,10 @@ Las conversiones a sistema octal y hexadecimal fueron verificadas mediante cálc
 
 ### 9. Conclusiones
 
-El microcontrolador interpreta naturalmente valores binarios como números enteros.
+* El microcontrolador interpreta naturalmente valores binarios como números enteros.
 
-La separación en decenas y unidades permite visualizar números de dos cifras.
+* La separación en decenas y unidades permite visualizar números de dos cifras.
 
-El uso de una tabla de decodificación simplifica el control de los displays.
+* El uso de una tabla de decodificación simplifica el control de los displays.
 
-Se logró integrar correctamente hardware y software en un sistema embebido funcional.
+* Se logró integrar correctamente hardware y software en un sistema embebido funcional.
