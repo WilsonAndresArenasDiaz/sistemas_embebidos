@@ -1,0 +1,42 @@
+PIC16F887 con Comunicación Serial (C++)
+
+#include <xc.h>
+#include <stdio.h>
+#define _XTAL_FREQ 8000000
+
+void UART_Init(){
+    SPBRG = 51; // 9600 baud
+    BRGH = 1;
+    SYNC = 0;
+    SPEN = 1;
+    TXEN = 1;
+    CREN = 1;
+}
+
+void UART_Write(char data){
+    while(!TRMT);
+    TXREG = data;
+}
+
+char UART_Read(){
+    while(!RCIF);
+    return RCREG;
+}
+
+void UART_Write_Text(char *text){
+    while(*text)
+        UART_Write(*text++);
+}
+
+void main(){
+    TRISC6=0;
+    TRISC7=1;
+    UART_Init();
+
+    UART_Write_Text("Sistema Listo\r\n");
+
+    while(1){
+        char dato = UART_Read();
+        UART_Write(dato); // Eco
+    }
+}
