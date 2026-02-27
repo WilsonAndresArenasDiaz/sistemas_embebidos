@@ -30,8 +30,11 @@ Explicar el proceso matemático de conversión.
 
 #### Alimentación
 VDD → +5V
+
 VSS → GND
+
 Resistencia 10kΩ en MCLR
+
 Capacitor 100nF de desacoplo
 
 #### Entradas Binarias
