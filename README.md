@@ -1,5 +1,8 @@
 # Laboratorio de Sistemas Embebidos
 
+<img width="1221" height="694" alt="Captura de pantalla 2026-02-27 115601" src="https://github.com/user-attachments/assets/49725986-ba31-4520-9f4a-68ef82907616" />
+
+
 ## Laboratorio N° 1: Convertidor de Binario, Decimal, Octas y Hexagecimal usando PIC16F887.
 
 ### 1. Introducción
