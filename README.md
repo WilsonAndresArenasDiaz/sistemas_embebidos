@@ -88,8 +88,6 @@ Por ejemplo:
 
 ### 5. Codigo implementado
 
-## 5. Código implementado
-
 ```c
 #include <xc.h>
 #define _XTAL_FREQ 8000000
