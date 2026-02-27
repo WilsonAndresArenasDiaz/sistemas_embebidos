@@ -14,3 +14,5 @@ Sistema Hexadecimal
 El sistema permite visualizar el resultado en dos displays de 7 segmentos.
 El rango del sistema es:
 
+2^4 = 16 combinaciones posibles
+0 ≤ N ≤ 15
