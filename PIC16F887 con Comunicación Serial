@@ -5,17 +5,21 @@ PIC16F887 con Comunicación Serial (C++)
 #define _XTAL_FREQ 8000000
 
 void UART_Init(){
-    SPBRG = 51; // 9600 baud
-    BRGH = 1;
-    SYNC = 0;
-    SPEN = 1;
-    TXEN = 1;
-    CREN = 1;
+    SPBRG=51;
+    BRGH=1;
+    SYNC=0;
+    SPEN=1;
+    TXEN=1;
+    CREN=1;
 }
 
 void UART_Write(char data){
     while(!TRMT);
-    TXREG = data;
+    TXREG=data;
+}
+
+void UART_Text(char *text){
+    while(*text) UART_Write(*text++);
 }
 
 char UART_Read(){
@@ -23,9 +27,17 @@ char UART_Read(){
     return RCREG;
 }
 
-void UART_Write_Text(char *text){
-    while(*text)
-        UART_Write(*text++);
+unsigned int convertirDecimal(char *valor, int base){
+    unsigned int resultado=0;
+    while(*valor){
+        resultado*=base;
+        if(*valor>='0' && *valor<='9')
+            resultado+=*valor-'0';
+        else
+            resultado+=*valor-'A'+10;
+        valor++;
+    }
+    return resultado;
 }
 
 void main(){
@@ -33,10 +45,29 @@ void main(){
     TRISC7=1;
     UART_Init();
 
-    UART_Write_Text("Sistema Listo\r\n");
+    char valor[5];
+    int i;
 
     while(1){
-        char dato = UART_Read();
-        UART_Write(dato); // Eco
+        UART_Text("\r\nIngrese binario (max4): ");
+
+        for(i=0;i<4;i++){
+            valor[i]=UART_Read();
+            UART_Write(valor[i]);
+            if(valor[i]!='0' && valor[i]!='1'){
+                UART_Text("\r\nError caracter");
+                break;
+            }
+        }
+        valor[4]='\0';
+
+        unsigned int decimal=convertirDecimal(valor,2);
+
+        if(decimal>15){
+            UART_Text("\r\nError rango >15");
+        }else{
+            UART_Text("\r\nDecimal: ");
+            UART_Write(decimal+'0');
+        }
     }
 }
