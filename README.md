@@ -165,7 +165,7 @@ void main(){
         }
     }
 }
-´´´
+c´´´
 
 ### 6. Desarrollo del Sistema
 
