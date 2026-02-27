@@ -195,5 +195,3 @@ Las conversiones a sistema octal y hexadecimal fueron verificadas mediante cálc
 * La separación en decenas y unidades permite visualizar números de dos cifras.
 
 * El uso de una tabla de decodificación simplifica el control de los displays.
-
-* Se logró integrar correctamente hardware y software en un sistema embebido funcional.
