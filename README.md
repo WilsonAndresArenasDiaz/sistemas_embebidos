@@ -30,17 +30,11 @@ Desarrollar un sistema conversor binario utilizando el PIC16F887.
 ### 3. Diseño del Circuito
 
 #### Alimentación
-* VDD → +5V
-
-* VSS → GND
-
-* Resistencia 10kΩ en MCLR
-
-* Capacitor 100nF de desacoplo
 
 #### Entradas Binarias
 
 #### Displays 7 Segmentos
+
 
 ### 4. Proceso de Conversión
 
