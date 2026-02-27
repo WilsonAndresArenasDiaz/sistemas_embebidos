@@ -16,15 +16,13 @@ Desarrollar un sistema conversor binario utilizando el PIC16F887.
 
 ### 3. Objetivos Específicos
 
-Diseñar el circuito electrónico.
+* Diseñar el circuito electrónico.
 
-Implementar lectura digital de 4 bits.
+* Implementar lectura digital de 4 bits.
 
-Programar el microcontrolador en C++.
+* Programar el microcontrolador en C++.
 
-Implementar un decodificador de 7 segmentos.
-
-Explicar el proceso matemático de conversión.
+* Implementar un decodificador de 7 segmentos.
 
 ### 3. Diseño del Circuito
 
