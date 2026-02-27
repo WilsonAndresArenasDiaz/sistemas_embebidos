@@ -1,7 +1,6 @@
 PIC16F887 con Comunicación Serial (C++)
 
 #include <xc.h>
-#include <stdio.h>
 #define _XTAL_FREQ 8000000
 
 void UART_Init(){
@@ -18,7 +17,7 @@ void UART_Write(char data){
     TXREG=data;
 }
 
-void UART_Text(char *text){
+void UART_Text(const char *text){
     while(*text) UART_Write(*text++);
 }
 
@@ -33,7 +32,7 @@ unsigned int convertirDecimal(char *valor, int base){
         resultado*=base;
         if(*valor>='0' && *valor<='9')
             resultado+=*valor-'0';
-        else
+        else if(*valor>='A' && *valor<='F')
             resultado+=*valor-'A'+10;
         valor++;
     }
@@ -46,28 +45,31 @@ void main(){
     UART_Init();
 
     char valor[5];
+    unsigned int decimal;
     int i;
 
     while(1){
-        UART_Text("\r\nIngrese binario (max4): ");
 
+        UART_Text("\r\nIngrese BIN (max4): ");
+        
         for(i=0;i<4;i++){
             valor[i]=UART_Read();
             UART_Write(valor[i]);
+
             if(valor[i]!='0' && valor[i]!='1'){
                 UART_Text("\r\nError caracter");
                 break;
             }
         }
+
         valor[4]='\0';
 
-        unsigned int decimal=convertirDecimal(valor,2);
+        decimal=convertirDecimal(valor,2);
 
         if(decimal>15){
             UART_Text("\r\nError rango >15");
         }else{
-            UART_Text("\r\nDecimal: ");
-            UART_Write(decimal+'0');
+            UART_Text("\r\nDecimal valido");
         }
     }
 }
