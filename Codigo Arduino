@@ -1,0 +1,96 @@
+#include <DHT.h>
+
+#define DHTPIN 2
+#define DHTTYPE DHT11
+
+const int ledRojo = 8;
+const int ledVerde = 9;
+const int pinLDR = A1;
+
+DHT dht(DHTPIN, DHTTYPE);
+
+void setup() {
+  Serial.begin(9600);
+
+  pinMode(ledRojo, OUTPUT);
+  pinMode(ledVerde, OUTPUT);
+
+  dht.begin();
+
+  Serial.println("Sistema listo");
+}
+
+void loop() {
+
+  if (Serial.available()) {
+
+    String comando = Serial.readStringUntil('\n');
+    comando.trim();
+    comando.toLowerCase();
+
+    Serial.println("Recibido: " + comando);
+
+    // ---- CONTROL LED ROJO ----
+    if (comando.indexOf("rojo") != -1 && comando.indexOf("enci") != -1) {
+      digitalWrite(ledRojo, HIGH);
+      Serial.println("LED rojo encendido");
+    }
+
+    else if (comando.indexOf("rojo") != -1 && comando.indexOf("apag") != -1) {
+      digitalWrite(ledRojo, LOW);
+      Serial.println("LED rojo apagado");
+    }
+
+    // ---- CONTROL LED VERDE ----
+    else if (comando.indexOf("verde") != -1 && comando.indexOf("enci") != -1) {
+      digitalWrite(ledVerde, HIGH);
+      Serial.println("LED verde encendido");
+    }
+
+    else if (comando.indexOf("verde") != -1 && comando.indexOf("apag") != -1) {
+      digitalWrite(ledVerde, LOW);
+      Serial.println("LED verde apagado");
+    }
+
+    // ---- TEMPERATURA ----
+    else if (comando.indexOf("temperatura") != -1) {
+
+      float temperatura = dht.readTemperature();
+
+      if (isnan(temperatura)) {
+        Serial.println("Error leyendo temperatura");
+      } else {
+        Serial.print("Temperatura actual: ");
+        Serial.print(temperatura);
+        Serial.println(" grados Celsius");
+      }
+    }
+
+    // ---- HUMEDAD ----
+    else if (comando.indexOf("humedad") != -1) {
+
+      float humedad = dht.readHumidity();
+
+      if (isnan(humedad)) {
+        Serial.println("Error leyendo humedad");
+      } else {
+        Serial.print("Humedad actual: ");
+        Serial.print(humedad);
+        Serial.println(" %");
+      }
+    }
+
+    // ---- LUZ ----
+    else if (comando.indexOf("luz") != -1) {
+
+      int valorLuz = analogRead(pinLDR);
+
+      Serial.print("Nivel de luz: ");
+      Serial.println(valorLuz);
+    }
+
+    else {
+      Serial.println("Comando no reconocido");
+    }
+  }
+}
