@@ -85,7 +85,7 @@ Por ejemplo:
 
 ### 5. Codigo implementado
 
-```c
+```
 #include <xc.h>
 #define _XTAL_FREQ 8000000
 
@@ -215,7 +215,8 @@ Diseñar e implementar un sistema de monitoreo y control utilizando Arduino, sen
 ### 6. Código
 #### Arduiono
 
-``` #include <DHT.h>
+```
+#include <DHT.h>
 
 #define DHTPIN 2
 #define DHTTYPE DHT11
@@ -315,7 +316,49 @@ void loop() {
 
 #### Chatbot con Voz
 
+```
+import streamlit as st
+from gtts import gTTS
+import serial
+import time
+import base64
+from streamlit_mic_recorder import speech_to_text
 
+# CONFIGURA TU PUERTO
+PUERTO = "COM5"  # Cambia por tu puerto
+BAUDIOS = 9600
+
+arduino = serial.Serial(PUERTO, BAUDIOS)
+time.sleep(2)
+
+st.title("Chatbot con Voz + Arduino")
+
+texto = speech_to_text(language="es", use_container_width=True, just_once=True)
+
+if texto:
+    st.write("Tú:", texto)
+
+    # Enviar comando al Arduino
+    arduino.write((texto + "\n").encode())
+    time.sleep(1)
+
+    respuesta = ""
+
+    while arduino.in_waiting:
+        respuesta = arduino.readline().decode().strip()
+
+    st.write("Arduino:", respuesta)
+
+    # Convertir respuesta a voz
+    tts = gTTS(respuesta, lang="es")
+    tts.save("respuesta.mp3")
+
+    audio_file = open("respuesta.mp3", "rb")
+    audio_bytes = audio_file.read()
+    st.audio(audio_bytes, format="audio/mp3")
+
+    audio_file.close()
+```
 
 
 ### .7 Funcionamiento del Sistema
