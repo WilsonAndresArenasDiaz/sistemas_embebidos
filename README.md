@@ -156,7 +156,8 @@ void main(){
             UART_Text("\r\nDecimal valido");
         }
     }
-} ´´´
+}
+´´´
 
 
 ### 6. Desarrollo del Sistema
@@ -309,7 +310,8 @@ void loop() {
       Serial.println("Comando no reconocido");
     }
   }
-} ```
+}
+´´´
 
 #### Chatbot con Voz
 
