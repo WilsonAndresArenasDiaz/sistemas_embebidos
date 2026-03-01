@@ -212,9 +212,9 @@ Esto permite que el Arduino mida la variación de luz mediante el ADC (0–1023)
 Se utiliza comunicación serial USB a 9600 baudios para enviar comandos y recibir respuestas desde el computador.
 
 
-### 5. Código
+### 5. Código implementado
 
-#### Arduiono
+#### Arduino
 
 ```
 #include <DHT.h>
@@ -378,6 +378,29 @@ Ejemplos de comandos:
 * "dime el nivel de luz"
 
 #### Video: https://unipanamericanaeduco-my.sharepoint.com/:v:/g/personal/afgarciadelrio_ucompensar_edu_co/IQC0cIhxw5J2Qr4rnXT7m7iVATZeNg57dsTgvA5ygQulGAE?e=H1RfdB
+
+
+
+
+## Laboratorio N° 3: 
+
+### 1. Introduccion
+
+### 2. Objivo General
+Diseñar e implementar un sistema de monitoreo y control utilizando Arduino, sensores ambientales y comunicación serial.
+
+### 3. Objetivos especificos
+
+
+### 4. Diseño del sistema
+
+
+### 5. Código implementado
+
+### 6. Funcionamiento del Sistema
+
+#### Video:
+
 
 
 
