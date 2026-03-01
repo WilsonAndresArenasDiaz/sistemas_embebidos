@@ -186,6 +186,9 @@ Las conversiones a sistema octal y hexadecimal fueron verificadas mediante cálc
 
 ## Laboratorio N° 2: Monitoreo de ilumacion de tempratura mediante ChatBoot
 
+<img width="1274" height="701" alt="Captura de pantalla 2026-03-01 120220" src="https://github.com/user-attachments/assets/3aca48d3-1000-4fd5-9190-11314f220c82" />
+
+
 ### 1. Introduccion
 En esta segunda etapa del laboratorio se desarrolló un sistema embebido basado en Arduino, capaz de:
 * Controlar dispositivos de salida (LED rojo y verde).
