@@ -157,7 +157,7 @@ void main(){
         }
     }
 }
-´´´
+```
 
 
 ### 6. Desarrollo del Sistema
@@ -311,7 +311,7 @@ void loop() {
     }
   }
 }
-´´´
+```
 
 #### Chatbot con Voz
 
