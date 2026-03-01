@@ -27,7 +27,7 @@ Desarrollar un sistema conversor binario utilizando el PIC16F887.
 
 * Implementar un decodificador de 7 segmentos.
 
-### 3. Diseño del Circuito
+### 4. Diseño del Circuito
 
 #### Alimentación
 
@@ -35,7 +35,7 @@ Desarrollar un sistema conversor binario utilizando el PIC16F887.
 
 #### Displays 7 Segmentos
 
-### 4. Codigo implementado
+### 5. Codigo implementado
 
 ```
 #include <xc.h>
@@ -112,7 +112,7 @@ void main(){
 ```
 
 
-### 5. Funcionamiento del Sistema
+### 6. Funcionamiento del Sistema
 
 1. El funcionamiento del sistema se realiza en las siguientes etapas:
 
