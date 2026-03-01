@@ -187,38 +187,154 @@ Las conversiones a sistema octal y hexadecimal fueron verificadas mediante cálc
 ## Laboratorio N° 2: Monitoreo de ilumacion de tempratura mediante ChatBoot
 
 ### 1. Introduccion
-Este proyecto consiste en el desarrollo de un sistema embebido que integra un Arduino con un chatbot ejecutado en una computadora, permitiendo:
-Controlar iluminación (2 LEDs).
-* Monitorear temperatura.
-* Medir nivel de iluminación ambiental.
-* Comunicación bidireccional mediante puerto serial.
+En esta segunda etapa del laboratorio se desarrolló un sistema embebido basado en Arduino, capaz de:
+* Controlar dispositivos de salida (LED rojo y verde).
+* Medir variables ambientales:
+    * Temperatura.
+    * Humedad.
+    * Nivel de iluminación.
+*Recibir comandos externos mediante comunicación serial.
+* Integrarse posteriormente con un chatbot con reconocimiento de voz.
 
-El chatbot se ejecuta en Python y envía comandos al Arduino a través de comunicación serial, permitiendo interacción por texto o voz.
+El sistema implementa una arquitectura de comunicación PC ↔ Arduino mediante puerto serial, permitiendo el control y monitoreo en tiempo real.
 
 ### 2. Objivo General
-* Implementar comunicación serial entre Arduino y computadora.
-* Controlar dispositivos de salida (LEDs).
-*Leer sensores analógicos (temperatura y luz).
-*Diseñar un chatbot que interprete comandos del usuario.
-*Integrar hardware y software en un sistema funcional.
+Diseñar e implementar un sistema de monitoreo y control utilizando Arduino, sensores ambientales y comunicación serial.
 
-### 3. Diseño del Circuito
-#### Comunicación Serial
-#### Control de Iluminación
-#### Sensor de Temperatura (LM35)
-#### Sensor de Iluminación (LDR)
+### 4. Objetivos especificos
+* Implementar lectura digital del sensor DHT11.
+* Implementar lectura analógica del sensor LDR.
+* Desarrollar control digital de LEDs.
+* Establecer comunicación serial bidireccional.
+* Permitir interpretación de comandos en lenguaje natural.
 
+### 5. Diseño del sistema
 
 
-### 4. Desarollo del sistema
-1. El usuario escribe o pronuncia un comando.
-2. El chatbot interpreta el texto.
-3. Python envía el comando al Arduino por puerto serial.
-4. Arduino ejecuta la acción correspondiente:
-    * Encender o apagar LEDs.
-    * Medir temperatura.
-    * Medir nivel de luz.
-5. Arduino envía una respuesta.
-6. El chatbot muestra la respuesta al usuario.
+
+### 6. Código
+#### Arduiono
+
+``` #include <DHT.h>
+
+#define DHTPIN 2
+#define DHTTYPE DHT11
+
+const int ledRojo = 8;
+const int ledVerde = 9;
+const int pinLDR = A1;
+
+DHT dht(DHTPIN, DHTTYPE);
+
+void setup() {
+  Serial.begin(9600);
+
+  pinMode(ledRojo, OUTPUT);
+  pinMode(ledVerde, OUTPUT);
+
+  dht.begin();
+
+  Serial.println("Sistema listo");
+}
+
+void loop() {
+
+  if (Serial.available()) {
+
+    String comando = Serial.readStringUntil('\n');
+    comando.trim();
+    comando.toLowerCase();
+
+    Serial.println("Recibido: " + comando);
+
+    // ---- CONTROL LED ROJO ----
+    if (comando.indexOf("rojo") != -1 && comando.indexOf("enci") != -1) {
+      digitalWrite(ledRojo, HIGH);
+      Serial.println("LED rojo encendido");
+    }
+
+    else if (comando.indexOf("rojo") != -1 && comando.indexOf("apag") != -1) {
+      digitalWrite(ledRojo, LOW);
+      Serial.println("LED rojo apagado");
+    }
+
+    // ---- CONTROL LED VERDE ----
+    else if (comando.indexOf("verde") != -1 && comando.indexOf("enci") != -1) {
+      digitalWrite(ledVerde, HIGH);
+      Serial.println("LED verde encendido");
+    }
+
+    else if (comando.indexOf("verde") != -1 && comando.indexOf("apag") != -1) {
+      digitalWrite(ledVerde, LOW);
+      Serial.println("LED verde apagado");
+    }
+
+    // ---- TEMPERATURA ----
+    else if (comando.indexOf("temperatura") != -1) {
+
+      float temperatura = dht.readTemperature();
+
+      if (isnan(temperatura)) {
+        Serial.println("Error leyendo temperatura");
+      } else {
+        Serial.print("Temperatura actual: ");
+        Serial.print(temperatura);
+        Serial.println(" grados Celsius");
+      }
+    }
+
+    // ---- HUMEDAD ----
+    else if (comando.indexOf("humedad") != -1) {
+
+      float humedad = dht.readHumidity();
+
+      if (isnan(humedad)) {
+        Serial.println("Error leyendo humedad");
+      } else {
+        Serial.print("Humedad actual: ");
+        Serial.print(humedad);
+        Serial.println(" %");
+      }
+    }
+
+    // ---- LUZ ----
+    else if (comando.indexOf("luz") != -1) {
+
+      int valorLuz = analogRead(pinLDR);
+
+      Serial.print("Nivel de luz: ");
+      Serial.println(valorLuz);
+    }
+
+    else {
+      Serial.println("Comando no reconocido");
+    }
+  }
+} ```
+
+#### Chatbot con Voz
+
+
+
+
+### .7 Funcionamiento del Sistema
+El sistema opera bajo un esquema de recepción de comandos:
+1. El Arduino espera datos en el puerto serial.
+2. Recibe una cadena de texto.
+3. Convierte el texto a minúsculas.
+4. Busca palabras clave.
+5. Ejecuta la acción correspondiente.
+
+Ejemplos de comandos:
+* "enciende el rojo"
+* "apaga el verde"
+* "dime la temperatura"
+* "dime la humedad"
+* "dime el nivel de luz"
+
+*Video*: 
+
+
+
 
 
