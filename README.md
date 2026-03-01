@@ -183,6 +183,9 @@ Diseñar e implementar un sistema de monitoreo y control utilizando Arduino, sen
 
 ### 4. Diseño del sistema
 
+![Multimedia](https://github.com/user-attachments/assets/4e0eae4d-9d29-4193-ae23-2ebf0f28d64e)
+
+
 El sistema se compone de sensores de entrada, actuadores de salida y comunicación serial con el computador.
 
 #### Conexión del DHT11 (Temperatura y Humedad)
