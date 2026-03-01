@@ -156,8 +156,7 @@ void main(){
             UART_Text("\r\nDecimal valido");
         }
     }
-}
-```
+} ´´´
 
 
 ### 6. Desarrollo del Sistema
