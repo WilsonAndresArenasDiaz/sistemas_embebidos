@@ -35,55 +35,7 @@ Desarrollar un sistema conversor binario utilizando el PIC16F887.
 
 #### Displays 7 Segmentos
 
-
-### 4. Proceso de Conversión
-
-#### Binario → Decimal
-La conversión de binario a decimal se realiza sumando las potencias de 2 correspondientes a cada bit activo. Sin embargo, en los microcontroladores, el valor leído desde un puerto digital ya es interpretado internamente como un número entero, por lo que no es necesario implementar manualmente la fórmula matemática.
-
-#### Binario → Octal
-El sistema octal trabaja en base 8. La conversión desde decimal se realiza dividiendo el número entre 8 y obteniendo el cociente y el residuo.
-Por ejemplo, el número 15 en decimal equivale a 17 en octal.
-
-#### Conversión a Hexadecimal
-El sistema hexadecimal trabaja en base 16. Utiliza los símbolos del 0 al 9 y las letras A, B, C, D, E y F para representar valores entre 10 y 15.
-
-Por ejemplo:
-
-10 = A
-
-11 = B
-
-12 = C
-
-13 = D
-
-14 = E
-
-15 = F
-
-#### Tabla de Conversión
-
-| Binario | Decimal | Octal | Hexadecimal |
-| ------- | ------- | ----- | ----------- |
-| 0000    | 0       | 0     | 0           |
-| 0001    | 1       | 1     | 1           |
-| 0010    | 2       | 2     | 2           |
-| 0011    | 3       | 3     | 3           |
-| 0100    | 4       | 4     | 4           |
-| 0101    | 5       | 5     | 5           |
-| 0110    | 6       | 6     | 6           |
-| 0111    | 7       | 7     | 7           |
-| 1000    | 8       | 10    | 8           |
-| 1001    | 9       | 11    | 9           |
-| 1010    | 10      | 12    | A           |
-| 1011    | 11      | 13    | B           |
-| 1100    | 12      | 14    | C           |
-| 1101    | 13      | 15    | D           |
-| 1110    | 14      | 16    | E           |
-| 1111    | 15      | 17    | F           |
-
-### 5. Codigo implementado
+### 4. Codigo implementado
 
 ```
 #include <xc.h>
@@ -160,7 +112,7 @@ void main(){
 ```
 
 
-### 6. Desarrollo del Sistema
+### 5. Funcionamiento del Sistema
 
 1. El funcionamiento del sistema se realiza en las siguientes etapas:
 
@@ -176,11 +128,29 @@ void main(){
 
 7. Los displays muestran el valor decimal correspondiente.
 
-### 8. Resultados
+#### Tabla de Conversión
 
-El sistema funcionó correctamente dentro del rango esperado (0 a 15), mostrando en los displays el valor decimal correspondiente a la combinación binaria ingresada.
+| Binario | Decimal | Octal | Hexadecimal |
+| ------- | ------- | ----- | ----------- |
+| 0000    | 0       | 0     | 0           |
+| 0001    | 1       | 1     | 1           |
+| 0010    | 2       | 2     | 2           |
+| 0011    | 3       | 3     | 3           |
+| 0100    | 4       | 4     | 4           |
+| 0101    | 5       | 5     | 5           |
+| 0110    | 6       | 6     | 6           |
+| 0111    | 7       | 7     | 7           |
+| 1000    | 8       | 10    | 8           |
+| 1001    | 9       | 11    | 9           |
+| 1010    | 10      | 12    | A           |
+| 1011    | 11      | 13    | B           |
+| 1100    | 12      | 14    | C           |
+| 1101    | 13      | 15    | D           |
+| 1110    | 14      | 16    | E           |
+| 1111    | 15      | 17    | F           |
 
-Las conversiones a sistema octal y hexadecimal fueron verificadas mediante cálculos teóricos y comparación con la tabla de resultados.
+
+
 
 
 
@@ -204,14 +174,14 @@ El sistema implementa una arquitectura de comunicación PC ↔ Arduino mediante 
 ### 2. Objivo General
 Diseñar e implementar un sistema de monitoreo y control utilizando Arduino, sensores ambientales y comunicación serial.
 
-### 4. Objetivos especificos
+### 3. Objetivos especificos
 * Implementar lectura digital del sensor DHT11.
 * Implementar lectura analógica del sensor LDR.
 * Desarrollar control digital de LEDs.
 * Establecer comunicación serial bidireccional.
 * Permitir interpretación de comandos en lenguaje natural.
 
-### 5. Diseño del sistema
+### 4. Diseño del sistema
 
 El sistema se compone de sensores de entrada, actuadores de salida y comunicación serial con el computador.
 
@@ -239,7 +209,7 @@ Esto permite que el Arduino mida la variación de luz mediante el ADC (0–1023)
 Se utiliza comunicación serial USB a 9600 baudios para enviar comandos y recibir respuestas desde el computador.
 
 
-### 6. Código
+### 5. Código
 
 #### Arduiono
 
@@ -389,7 +359,7 @@ if texto:
 ```
 
 
-### .7 Funcionamiento del Sistema
+### 6. Funcionamiento del Sistema
 El sistema opera bajo un esquema de recepción de comandos:
 1. El Arduino espera datos en el puerto serial.
 2. Recibe una cadena de texto.
