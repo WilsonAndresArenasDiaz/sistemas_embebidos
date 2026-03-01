@@ -213,9 +213,34 @@ Diseñar e implementar un sistema de monitoreo y control utilizando Arduino, sen
 
 ### 5. Diseño del sistema
 
+El sistema se compone de sensores de entrada, actuadores de salida y comunicación serial con el computador.
+
+#### Conexión del DHT11 (Temperatura y Humedad)
+* VCC → 5V del Arduino
+* GND → GND del Arduino
+* DATA → Pin digital 2
+El sensor envía datos digitales, por lo que no usa entrada analógica.
+
+#### Conexión del LDR (Iluminación)
+* Una terminal del LDR → 5V
+* La otra terminal → Pin A1
+* Desde A1 → Resistencia 10kΩ → GND
+Esto permite que el Arduino mida la variación de luz mediante el ADC (0–1023).
+
+#### Conexión del LED Rojo
+* Pin 8 → Resistencia 220Ω → Ánodo del LED
+* Cátodo → GND
+
+#### Conexión del LED Verde
+* Pin 9 → Resistencia 220Ω → Ánodo del LED
+* Cátodo → GND
+
+#### Comunicación
+Se utiliza comunicación serial USB a 9600 baudios para enviar comandos y recibir respuestas desde el computador.
 
 
 ### 6. Código
+
 #### Arduiono
 
 ```
@@ -379,7 +404,7 @@ Ejemplos de comandos:
 * "dime la humedad"
 * "dime el nivel de luz"
 
-*Video*: 
+#### Video: https://unipanamericanaeduco-my.sharepoint.com/:v:/g/personal/afgarciadelrio_ucompensar_edu_co/IQC0cIhxw5J2Qr4rnXT7m7iVATZeNg57dsTgvA5ygQulGAE?e=H1RfdB
 
 
 
