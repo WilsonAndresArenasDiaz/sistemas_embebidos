@@ -1,0 +1,46 @@
+while cap.isOpened():
+    ret, frame = cap.read()
+    if not ret:
+        print("No se pudo recibir el frame.")
+        break
+
+    # Convertir de BGR (OpenCV) a RGB (MediaPipe)
+    image_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
+    # Mejorar rendimiento
+    image_rgb.flags.writeable = False
+
+    # Procesar imagen
+    results = pose.process(image_rgb)
+
+    # Restaurar escritura
+    image_rgb.flags.writeable = True
+
+    # Convertir nuevamente a BGR
+    frame = cv2.cvtColor(image_rgb, cv2.COLOR_RGB2BGR)
+
+    # Dibujar landmarks si se detectan
+    if results.pose_landmarks:
+        mp_drawing.draw_landmarks(
+            frame,
+            results.pose_landmarks,
+            mp_pose.POSE_CONNECTIONS
+        )
+
+        # Ejemplo: imprimir coordenadas del hombro derecho
+        right_shoulder = results.pose_landmarks.landmark[
+            mp_pose.PoseLandmark.RIGHT_SHOULDER
+        ]
+        print(
+            "Hombro derecho -> X:",
+            round(right_shoulder.x, 3),
+            "Y:",
+            round(right_shoulder.y, 3)
+        )
+
+    # Mostrar ventana
+    cv2.imshow("Pose Landmark Detection", frame)
+
+    # Salir con tecla ESC
+    if cv2.waitKey(5) & 0xFF == 27:
+        break
