@@ -1,0 +1,82 @@
+/*
+ * CONVERSOR BINARIO 4 BITS - Laboratorio Sistemas Embebidos
+ * Entradas: 4 Interruptores (D, C, B, A)
+ * Salida: Monitor Serie y LCD I2C 16x2
+ */
+
+#include <Wire.h> 
+#include <LiquidCrystal_I2C.h>
+
+// Configuración LCD I2C (Dirección 0x27)
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+// Definición de Pines para los interruptores (D, C, B, A)
+// Conéctalos a estos pines digitales del Arduino
+const int pinD = 2; // Bit más significativo (MSB) - Peso 8
+const int pinC = 3; // Peso 4
+const int pinB = 4; // Peso 2
+const int pinA = 5; // Bit menos significativo (LSB) - Peso 1
+
+void setup() {
+  Serial.begin(9600);
+  
+  // Configurar pines de entrada con resistencia PULL-UP interna
+  // Esto significa que el switch debe conectar el pin a GND al cerrarse
+  pinMode(pinD, INPUT_PULLUP);
+  pinMode(pinC, INPUT_PULLUP);
+  pinMode(pinB, INPUT_PULLUP);
+  pinMode(pinA, INPUT_PULLUP);
+
+  lcd.init();
+  lcd.backlight();
+  
+  lcd.setCursor(0, 0);
+  lcd.print("SISTEMA BINARIO");
+  lcd.setCursor(0, 1);
+  lcd.print("4 BITS LISTO");
+  delay(2000);
+  lcd.clear();
+}
+
+void loop() {
+  // 1. Leer los estados de los interruptores
+  // Como usamos INPUT_PULLUP, el valor se invierte (!) 
+  // porque 0V (GND) será interpretado como '1' lógico.
+  int valD = !digitalRead(pinD); 
+  int valC = !digitalRead(pinC);
+  int valB = !digitalRead(pinB);
+  int valA = !digitalRead(pinA);
+
+  // 2. Calcular el valor decimal
+  // Binario a Decimal: (D*2^3) + (C*2^2) + (B*2^1) + (A*2^0)
+  int decimal = (valD * 8) + (valC * 4) + (valB * 2) + (valA * 1);
+
+  // 3. Crear el string del número binario para mostrarlo
+  String binario = String(valD) + String(valC) + String(valB) + String(valA);
+
+  // 4. Mostrar en el LCD
+  actualizarLCD(binario, decimal);
+
+  // 5. Mostrar en el Monitor Serie (opcional)
+  Serial.print("Binario: "); Serial.print(binario);
+  Serial.print(" -> Dec: "); Serial.print(decimal);
+  Serial.print(" | Oct: "); Serial.print(decimal, OCT);
+  Serial.print(" | Hex: "); Serial.println(decimal, HEX);
+
+  delay(500); // Pequeña pausa para estabilidad
+}
+
+void actualizarLCD(String bin, int dec) {
+  lcd.setCursor(0, 0);
+  lcd.print("BIN: ");
+  lcd.print(bin);
+  lcd.print("  DEC: ");
+  lcd.print(dec);
+  if (dec < 10) lcd.print(" "); // Limpiar residuo de dígitos
+
+  lcd.setCursor(0, 1);
+  lcd.print("OCT: ");
+  lcd.print(dec, OCT);
+  lcd.print("  HEX: ");
+  lcd.print(dec, HEX);
+}
