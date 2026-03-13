@@ -345,8 +345,12 @@ El PIC recibe la información mediante comunicación serial y activa los LEDs co
 La conexión se realiza mediante cable USB, permitiendo la comunicación serial entre Python y Arduino.
 
 ##### Arduino	PIC16F887
-|TX (Pin 1) |   |RX (RC7)|
-|GND            |GND|
+
+| Arduino    | PIC16F887 | Descripción                               |
+| ---------- | --------- | ----------------------------------------- |
+| TX (Pin 1) | RC7 (RX)  | Transmisión de datos desde Arduino al PIC |
+| GND        | GND       | Referencia de tierra compartida           |
+
 
 ##### LEDs conectados al PIC
 
