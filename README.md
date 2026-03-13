@@ -312,18 +312,170 @@ Ejemplos de comandos:
 
 ### 1. Introduccion
 
+En este laboratorio se desarrolló un sistema de monitoreo y control que integra sensores, microcontroladores y visión artificial. El sistema utiliza OpenCV en Python para detectar objetos mediante la cámara del computador.
+La información detectada se envía por comunicación serial hacia Arduino Uno, el cual permite controlar dispositivos electrónicos del sistema.
+
 ### 2. Objivo General
 Diseñar e implementar un sistema de monitoreo y control utilizando Arduino, sensores ambientales y comunicación serial.
 
 ### 3. Objetivos especificos
 
+* Implementar la lectura de sensores mediante Arduino.
+
+* Desarrollar un sistema de detección de objetos usando visión artificial.
+
+* Establecer comunicación serial entre el computador y Arduino.
+
+* Integrar el procesamiento de imágenes con el control de hardware.
 
 ### 4. Diseño del sistema
+
+El sistema está compuesto por tres elementos principales: el computador, el Arduino Uno y el microcontrolador PIC16F887.
+
+El computador ejecuta el programa desarrollado en Python utilizando la librería OpenCV, el cual permite capturar imágenes mediante la cámara y detectar objetos según su color o forma.
+
+Una vez identificado el objeto, el programa envía un comando a través del puerto serial hacia el Arduino. El Arduino actúa como puente de comunicación y retransmite el mensaje hacia el PIC16F887.
+
+El PIC recibe la información mediante comunicación serial y activa los LEDs correspondientes según el objeto detectado.
+
+#### Conexiones del sistema
+
+##### Arduino – Computador
+
+La conexión se realiza mediante cable USB, permitiendo la comunicación serial entre Python y Arduino.
+
+##### Arduino – PIC16F887
+
+##### Arduino	PIC16F887
+TX (Pin 1)	RX (RC7)
+GND	GND
+
+##### LEDs conectados al PIC
+
+LED	Pin PIC
+LED rojo	RB0
+LED azul	RB1
+LED verde	RB2
+
+Cada LED se conecta en serie con una resistencia de 220Ω hacia tierra (GND).
 
 
 ### 5. Código implementado
 
+#### Código Python (OpenCV)
+
+```
+import cv2
+import numpy as np
+import serial
+import time
+
+arduino = serial.Serial('COM3',9600)
+time.sleep(2)
+
+cap = cv2.VideoCapture(0)
+
+red_lower = np.array([0,100,100])
+red_upper = np.array([10,255,255])
+
+blue_lower = np.array([100,100,100])
+blue_upper = np.array([130,255,255])
+
+while True:
+
+    ret, frame = cap.read()
+
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+
+    mask_red = cv2.inRange(hsv, red_lower, red_upper)
+    mask_blue = cv2.inRange(hsv, blue_lower, blue_upper)
+
+    contours_red,_ = cv2.findContours(mask_red,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+    contours_blue,_ = cv2.findContours(mask_blue,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+
+    for cnt in contours_red:
+        if cv2.contourArea(cnt) > 500:
+            arduino.write(b"R")
+
+    for cnt in contours_blue:
+        if cv2.contourArea(cnt) > 500:
+            arduino.write(b"A")
+
+    cv2.imshow("Camara",frame)
+
+    if cv2.waitKey(1) == 27:
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+```
+
+##### Código Arduino
+
+```
+void setup() {
+
+  Serial.begin(9600);
+
+}
+
+void loop() {
+
+  if(Serial.available()){
+
+    char dato = Serial.read();
+
+    Serial.write(dato);
+
+  }
+
+}
+```
+
+#### Código PIC16F887
+
+```
+#include <16F887.h>
+#fuses HS,NOWDT,NOLVP
+#use delay(clock=20000000)
+
+#use rs232(baud=9600,xmit=PIN_C6,rcv=PIN_C7)
+
+void main(){
+
+   char dato;
+
+   set_tris_b(0x00);
+
+   while(TRUE){
+
+      if(kbhit()){
+
+         dato = getc();
+
+         if(dato == 'R'){
+            output_high(PIN_B0);
+         }
+
+         if(dato == 'A'){
+            output_high(PIN_B1);
+         }
+
+      }
+
+   }
+
+}
+```
+
+
 ### 6. Funcionamiento del Sistema
+
+El sistema inicia activando la cámara del computador y ejecutando el programa de procesamiento de imágenes.
+Cuando se detecta un objeto con las características definidas, el sistema envía un comando al Arduino.
+El Arduino procesa la información y activa el dispositivo correspondiente, permitiendo realizar acciones de control basadas en la detección visual.
+
+
 
 #### Video:
 
