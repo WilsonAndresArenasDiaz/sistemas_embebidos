@@ -347,15 +347,15 @@ La conexión se realiza mediante cable USB, permitiendo la comunicación serial 
 ##### Arduino – PIC16F887
 
 ##### Arduino	PIC16F887
-TX (Pin 1)	RX (RC7)
-GND	GND
+|TX (Pin 1) |   |RX (RC7)|
+|GND|   |GND|
 
 ##### LEDs conectados al PIC
 
-LED	Pin PIC
-LED rojo	RB0
-LED azul	RB1
-LED verde	RB2
+|LED|   |Pin PIC|
+|LED rojo| |RB0|
+|LED azul|   |RB1|
+|LED verde|   |RB2|
 
 Cada LED se conecta en serie con una resistencia de 220Ω hacia tierra (GND).
 
