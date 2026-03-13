@@ -29,14 +29,49 @@ Desarrollar un sistema conversor binario utilizando el PIC16F887.
 
 ### 4. Diseño del Circuito
 
-#### Alimentación
+El sistema se implementa utilizando el microcontrolador PIC16F887, el cual se encarga de recibir datos mediante comunicación serial y realizar el procesamiento correspondiente.
 
-#### Entradas Binarias
+El montaje físico consiste en conectar el PIC16F887 al computador mediante un módulo de comunicación serial o un conversor USB-TTL. A través de esta conexión se envían comandos desde el programa en Python hacia el microcontrolador.
 
-#### Displays 7 Segmentos
+El PIC recibe la información a través de su módulo UART y procesa los datos recibidos para ejecutar las acciones definidas en el programa.
+
+#### Conexiones del sistema
+
+| Dispositivo            | Pin      | Descripción                           |
+| ---------------------- | -------- | ------------------------------------- |
+| TX (USB-TTL / Arduino) | RC7 (RX) | Recepción de datos seriales en el PIC |
+| GND                    | GND      | Referencia de tierra común            |
+
+
+El sistema utiliza comunicación serial configurada a 9600 baudios, lo que permite transmitir comandos de manera simple entre el computador y el microcontrolador.
 
 ### 5. Codigo implementado
 
+```
+#include <16F887.h>
+#fuses HS,NOWDT,NOLVP
+#use delay(clock=20000000)
+
+#use rs232(baud=9600,xmit=PIN_C6,rcv=PIN_C7)
+
+void main(){
+
+   char dato;
+
+   while(TRUE){
+
+      if(kbhit()){
+
+         dato = getc();
+
+         // Procesar comando recibido
+
+      }
+
+   }
+
+}
+```
 
 ### 6. Funcionamiento del Sistema
 
