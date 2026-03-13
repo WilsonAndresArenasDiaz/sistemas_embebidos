@@ -344,18 +344,17 @@ El PIC recibe la información mediante comunicación serial y activa los LEDs co
 
 La conexión se realiza mediante cable USB, permitiendo la comunicación serial entre Python y Arduino.
 
-##### Arduino – PIC16F887
-
 ##### Arduino	PIC16F887
 |TX (Pin 1) |   |RX (RC7)|
-|GND|   |GND|
+|GND            |GND|
 
 ##### LEDs conectados al PIC
 
-|LED|   |Pin PIC|
-|LED rojo| |RB0|
-|LED azul|   |RB1|
-|LED verde|   |RB2|
+| Dispositivo | Pin PIC16F887 | Descripción                     |
+| ----------- | ------------- | ------------------------------- |
+| LED rojo    | RB0           | Indica detección de objeto rojo |
+| LED azul    | RB1           | Indica detección de objeto azul |
+| LED verde   | RB2           | Indicador adicional del sistema |
 
 Cada LED se conecta en serie con una resistencia de 220Ω hacia tierra (GND).
 
