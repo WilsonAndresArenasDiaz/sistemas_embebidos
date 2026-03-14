@@ -29,21 +29,39 @@ Desarrollar un sistema conversor binario utilizando el PIC16F887.
 
 ### 4. Diseño del Circuito
 
-El sistema se implementa utilizando el microcontrolador PIC16F887, el cual se encarga de recibir datos mediante comunicación serial y realizar el procesamiento correspondiente.
+El sistema se implementa utilizando el microcontrolador PIC16F887, un módulo HEX Keypad y dos displays de 7 segmentos.
 
-El montaje físico consiste en conectar el PIC16F887 al computador mediante un módulo de comunicación serial o un conversor USB-TTL. A través de esta conexión se envían comandos desde el programa en Python hacia el microcontrolador.
+El teclado HEX permite ingresar un número en formato binario de 4 bits (A, B, C, D), el cual es leído por el microcontrolador a través de cuatro pines de entrada. Este valor binario puede representar números entre 0 y 15.
 
-El PIC recibe la información a través de su módulo UART y procesa los datos recibidos para ejecutar las acciones definidas en el programa.
+El microcontrolador procesa este valor y lo convierte a su equivalente en dos dígitos decimales, los cuales se muestran en los dos displays de 7 segmentos:
+
+* Display 1: muestra la decena
+
+* Display 2: muestra la unidad
+
+Por ejemplo, si el valor binario corresponde al número 15, el primer display mostrará 1 y el segundo display mostrará 5.
 
 #### Conexiones del sistema
 
-| Dispositivo            | Pin      | Descripción                           |
-| ---------------------- | -------- | ------------------------------------- |
-| TX (USB-TTL / Arduino) | RC7 (RX) | Recepción de datos seriales en el PIC |
-| GND                    | GND      | Referencia de tierra común            |
+| Componente               | Conexión al PIC |
+| ------------------------ | --------------- |
+| HEX Keypad D0            | RA0             |
+| HEX Keypad D1            | RA1             |
+| HEX Keypad D2            | RA2             |
+| HEX Keypad D3            | RA3             |
+| Segmento A               | RB0             |
+| Segmento B               | RB1             |
+| Segmento C               | RB2             |
+| Segmento D               | RB3             |
+| Segmento E               | RB4             |
+| Segmento F               | RB5             |
+| Segmento G               | RB6             |
+| Control display decenas  | RC0             |
+| Control display unidades | RC1             |
 
+Cada segmento del display se conecta mediante resistencias de 220Ω para proteger los LEDs del display.
 
-El sistema utiliza comunicación serial configurada a 9600 baudios, lo que permite transmitir comandos de manera simple entre el computador y el microcontrolador.
+Los dos displays son controlados mediante multiplexación, activando cada uno de forma alternada para mostrar los dos dígitos del número.
 
 ### 5. Codigo implementado
 
@@ -52,24 +70,48 @@ El sistema utiliza comunicación serial configurada a 9600 baudios, lo que permi
 #fuses HS,NOWDT,NOLVP
 #use delay(clock=20000000)
 
-#use rs232(baud=9600,xmit=PIN_C6,rcv=PIN_C7)
+const int tabla7seg[10] = {
+   0b00111111, //0
+   0b00000110, //1
+   0b01011011, //2
+   0b01001111, //3
+   0b01100110, //4
+   0b01101101, //5
+   0b01111101, //6
+   0b00000111, //7
+   0b01111111, //8
+   0b01101111  //9
+};
 
 void main(){
 
-   char dato;
+   int valor;
+   int decenas;
+   int unidades;
+
+   set_tris_a(0x0F);
+   set_tris_b(0x00);
+   set_tris_c(0x00);
 
    while(TRUE){
 
-      if(kbhit()){
+      valor = input_a() & 0x0F;
 
-         dato = getc();
+      decenas = valor / 10;
+      unidades = valor % 10;
 
-         // Procesar comando recibido
+      // Mostrar decenas
+      output_high(PIN_C0);
+      output_low(PIN_C1);
+      output_b(tabla7seg[decenas]);
+      delay_ms(5);
 
-      }
-
+      // Mostrar unidades
+      output_low(PIN_C0);
+      output_high(PIN_C1);
+      output_b(tabla7seg[unidades]);
+      delay_ms(5);
    }
-
 }
 ```
 
