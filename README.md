@@ -137,7 +137,15 @@ A4 a C dip
 A5 a d dip 
 
 los demas del dip a tierra 
+Codigo homologado para arduirno 
 
+bas```
+#include <Wire.h>            // Librería para comunicación I2C.
+#include <LiquidCrystal_I2C.h> // Librería específica para controlar el LCD por I2C.
+
+// Crea el objeto 'lcd'. 0x27 es la dirección física, 16 columnas y 2 filas.
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+```
 
 ### 6. Funcionamiento del Sistema
 
