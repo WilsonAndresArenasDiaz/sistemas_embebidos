@@ -115,6 +115,30 @@ void main(){
 }
 ```
 
+Se realiza homologacion a un arduino por fallas en el programador de pic 
+
+Se monta en arduino con pantalla led 16x2 con i2c donde muestra el bin y una conversion a cada sistema, el diseño es un arduino alimentado por puerto serial de ahy en los pines 
+
+A4 a SDA
+
+A5 a scl
+
+5v a vcc
+
+gnd a gnd 
+
+
+A2 a A dip
+
+A3 a B dip 
+
+A4 a C dip 
+
+A5 a d dip 
+
+los demas del dip a tierra 
+
+
 ### 6. Funcionamiento del Sistema
 
 1. El funcionamiento del sistema se realiza en las siguientes etapas:
