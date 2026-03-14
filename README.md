@@ -148,6 +148,66 @@ Codigo homologado para arduirno
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 ```
 
+```
+// Se usan pines analógicos (A0-A3) como digitales para evitar conflicto con I2C (A4-A5).
+const int pinD = A3; // Entrada para el bit con peso 8.
+const int pinC = A2; // Entrada para el bit con peso 4.
+const int pinB = A1; // Entrada para el bit con peso 2.
+const int pinA = A0; // Entrada para el bit con peso 1.
+
+int ultimoDecimal = -1; // Almacena el valor previo para evitar que la pantalla parpadee.
+```
+
+```
+void setup() {
+  // INPUT_PULLUP activa una resistencia interna. Cuando el switch se cierra a GND, lee LOW.
+  pinMode(pinD, INPUT_PULLUP);
+  pinMode(pinC, INPUT_PULLUP);
+  pinMode(pinB, INPUT_PULLUP);
+  pinMode(pinA, INPUT_PULLUP);
+
+  lcd.init();       // Inicializa el hardware de la pantalla.
+  lcd.backlight();  // Enciende la luz de fondo del LCD.
+  
+  lcd.setCursor(0, 0);
+  lcd.print("SISTEMA OK"); // Mensaje de confirmación al arrancar.
+  delay(1000);
+}
+```
+
+```
+void loop() {
+  // digitalRead lee el pin. El '!' invierte el valor porque usamos PULLUP:
+  // Si el switch está en ON (GND), lee 0, pero '!' lo convierte en 1.
+  int d = !digitalRead(pinD); 
+  int c = !digitalRead(pinC);
+  int b = !digitalRead(pinB);
+  int a = !digitalRead(pinA);
+
+  // Algoritmo de conversión: multiplica cada bit por su potencia de 2 correspondiente.
+  int decimal = (d * 8) + (c * 4) + (b * 2) + (a * 1);
+
+  // Solo actualiza el LCD si el número ha cambiado.
+  if (decimal != ultimoDecimal) {
+    lcd.clear(); // Borra la pantalla para escribir datos nuevos.
+    
+    // Fila 0: Muestra el número binario y su equivalente decimal.
+    lcd.setCursor(0, 0);
+    lcd.print("B: ");
+    lcd.print(d); lcd.print(c); lcd.print(b); lcd.print(a);
+    lcd.print("  D: "); lcd.print(decimal);
+    
+    // Fila 1: Muestra la conversión automática a Octal y Hexadecimal.
+    lcd.setCursor(0, 1);
+    lcd.print("OCT:"); lcd.print(decimal, OCT);
+    lcd.print("  HEX:"); lcd.print(decimal, HEX);
+    
+    ultimoDecimal = decimal; // Actualiza el estado actual.
+  }
+  
+  delay(150); // Pequeña pausa para estabilizar las lecturas físicas.
+}
+```
 
 ### 6. Funcionamiento del Sistema
 
