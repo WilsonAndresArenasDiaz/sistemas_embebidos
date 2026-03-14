@@ -31,7 +31,7 @@ Desarrollar un sistema conversor binario utilizando el PIC16F887.
 
 El sistema se implementa utilizando el microcontrolador PIC16F887, un módulo HEX Keypad y dos displays de 7 segmentos.
 
-El teclado HEX permite ingresar un número en formato binario de 4 bits (A, B, C, D), el cual es leído por el microcontrolador a través de cuatro pines de entrada. Este valor binario puede representar números entre 0 y 15.
+El interruptor DIP permite ingresar un número en formato binario de 4 bits (A, B, C, D), el cual es leído por el microcontrolador a través de cuatro pines de entrada. Este valor binario puede representar números entre 0 y 15.
 
 El microcontrolador procesa este valor y lo convierte a su equivalente en dos dígitos decimales, los cuales se muestran en los dos displays de 7 segmentos:
 
