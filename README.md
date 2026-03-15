@@ -222,7 +222,7 @@ void loop() {
 </p>
 
 <p align="center">
-  <img src="WhatsApp Video 2026-03-14 at 9.02.45 PM.mp4" width="800" alt="funcionamiento">
+  <img src="WhatsApp Image 2026-03-14 at 9.25.11 PM.jpeg" width="800" alt="funcionamiento">
 </p>
 
 
