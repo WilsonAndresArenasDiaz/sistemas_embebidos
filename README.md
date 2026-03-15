@@ -225,6 +225,16 @@ void loop() {
   <img src="WhatsApp Image 2026-03-14 at 9.25.11 PM.jpeg" width="800" alt="funcionamiento">
 </p>
 
+### Justificación del cambio de Hardware de PIC a Arduino
+Debido a que el programador del PIC16F887 presentó fallas técnicas y no permitía cargar el código, decidimos sacar el proyecto adelante usando Arduino. Esta fue una mejor opción para el laboratorio por lo siguiente:
+
+Menos cables: Con el PIC nos tocaba conectar como 8 cables solo para el LCD. Al usar Arduino con el módulo I2C, solo usamos 2 pines (SDA y SCL). Así el montaje quedó mucho más limpio y no nos enredamos con tanto cable en la protoboard.
+
+* #### Conversión más fácil: 
+El software de Arduino ya trae funciones listas para pasar a Hexadecimal y Octal. Con el PIC nos hubiera tocado hacer toda la matemática a mano en el código, lo que quita mucho tiempo y gasta más memoria del chip.
+
+* #### Resistencias internas: 
+Aprovechamos que el Arduino tiene resistencias pull-up internas. Así conectamos el DIP Switch directo a tierra (GND) y nos ahorramos el espacio de poner resistencias físicas por fuera.
 
 ### 6. Funcionamiento del Sistema
 
