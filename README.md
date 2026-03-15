@@ -209,6 +209,10 @@ void loop() {
 }
 ```
 
+<p align="center">
+  <img src="Captura de pantalla 2026-03-14 204635.jpg" width="400" alt="Esquema de conexiones">
+</p>
+
 ### 6. Funcionamiento del Sistema
 
 1. El funcionamiento del sistema se realiza en las siguientes etapas:
