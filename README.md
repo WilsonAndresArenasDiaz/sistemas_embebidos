@@ -209,8 +209,10 @@ void loop() {
 }
 ```
 
+#### Esquema de conexiones arduino dip y lcd con i2c
+
 <p align="center">
-  <img src="Captura de pantalla 2026-03-14 204635.jpg" width="400" alt="Esquema de conexiones">
+  <img src="Captura de pantalla 2026-03-14 204635.jpg" width="800" alt="Esquema de conexiones">
 </p>
 
 ### 6. Funcionamiento del Sistema
