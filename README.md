@@ -218,8 +218,13 @@ void loop() {
 #### Funcionamiento
 
 <p align="center">
-  <img src="Captura de pantalla 2026-03-14 204635.jpg" width="800" alt="Esquema de conexiones">
+  <img src="WhatsApp Video 2026-03-14 at 9.02.45 PM.mp4" width="800" alt="funcionamiento">
 </p>
+
+<p align="center">
+  <img src="WhatsApp Video 2026-03-14 at 9.02.45 PM.mp4" width="800" alt="funcionamiento">
+</p>
+
 
 ### 6. Funcionamiento del Sistema
 
