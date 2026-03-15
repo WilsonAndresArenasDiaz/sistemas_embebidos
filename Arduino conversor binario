@@ -1,0 +1,57 @@
+#include <Wire.h> 
+#include <LiquidCrystal_I2C.h>
+
+// Configuración LCD I2C
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+// Reubicamos para no chocar con A4 y A5
+const int pinD = A3; // Bit D (8)
+const int pinC = A2; // Bit C (4)
+const int pinB = A1; // Bit B (2)
+const int pinA = A0; // Bit A (1)
+
+int ultimoDecimal = -1;
+
+void setup() {
+  // Configuración de entradas (Lado OFF a GND, Lado ON a Pin)
+  pinMode(pinD, INPUT_PULLUP);
+  pinMode(pinC, INPUT_PULLUP);
+  pinMode(pinB, INPUT_PULLUP);
+  pinMode(pinA, INPUT_PULLUP);
+
+  lcd.init();
+  lcd.backlight();
+  
+  lcd.setCursor(0, 0);
+  lcd.print("SISTEMA OK");
+  delay(1000);
+}
+
+void loop() {
+  // Leemos los interruptores
+  int d = !digitalRead(pinD);
+  int c = !digitalRead(pinC);
+  int b = !digitalRead(pinB);
+  int a = !digitalRead(pinA);
+
+  int decimal = (d * 8) + (c * 4) + (b * 2) + (a * 1);
+
+  if (decimal != ultimoDecimal) {
+    lcd.clear();
+    
+    // Fila 0: Binario
+    lcd.setCursor(0, 0);
+    lcd.print("B: ");
+    lcd.print(d); lcd.print(c); lcd.print(b); lcd.print(a);
+    lcd.print("  D: "); lcd.print(decimal);
+    
+    // Fila 1: Octal y Hex
+    lcd.setCursor(0, 1);
+    lcd.print("OCT:"); lcd.print(decimal, OCT);
+    lcd.print("  HEX:"); lcd.print(decimal, HEX);
+    
+    ultimoDecimal = decimal;
+  }
+  
+  delay(150); 
+}
